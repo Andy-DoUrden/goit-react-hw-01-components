@@ -15,12 +15,12 @@ const Title = styled.h2`
   font-size: 24px;
   font-weight: 700;
   color: grey;
-  margin: 30px auto 0 auto;
+  margin: 0 auto 30px auto;
+  padding-top: 30px;
 `;
 
 const StatList = styled.ul`
   display: flex;
-  margin-top: 30px;
   list-style: none;
 `;
 

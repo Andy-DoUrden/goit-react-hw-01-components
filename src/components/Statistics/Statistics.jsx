@@ -8,10 +8,10 @@ import {
   Percentage,
 } from './Statistics.styled';
 
-export const Statistics = ({ data }) => {
+export const Statistics = ({ data, title }) => {
   return (
     <StatisticsContainer>
-      <Title>Upload stats</Title>
+      {isTitle(title)}
 
       <StatList>
         {data.map(({ id, label, percentage }) => {
@@ -36,3 +36,9 @@ Statistics.propTypes = {
     })
   ).isRequired,
 };
+
+function isTitle(title) {
+  if (title) {
+    return <Title>{title}</Title>;
+  }
+}
