@@ -1,35 +1,56 @@
-// import Emotion from '@emotion/react'
 import PropTypes from 'prop-types';
-import user from './user.json';
+import {
+  ProfileContainer,
+  ProfileDescription,
+  ProfileAvatar,
+  ProfileName,
+  ProfileInfo,
+  ProfileStats,
+  ProfileStatsItem,
+  StatLabel,
+  StatCount,
+} from './Profile.styled';
 
-export const Profile = user => {
+export const Profile = ({ user }) => {
+  const { username, tag, location, avatar, stats } = user;
+
   return (
-    <div class="profile">
-      <div class="description">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png"
-          alt="User avatar"
-          class="avatar"
-        />
-        <p class="name">Petra Marica</p>
-        <p class="tag">@pmarica</p>
-        <p class="location">Salvador, Brasil</p>
-      </div>
+    <ProfileContainer>
+      <ProfileDescription>
+        <ProfileAvatar src={avatar} alt="User avatar" />
+        <ProfileName>{username}</ProfileName>
+        <ProfileInfo>@{tag}</ProfileInfo>
+        <ProfileInfo>{location}</ProfileInfo>
+      </ProfileDescription>
 
-      <ul class="stats">
-        <li>
-          <span class="label">Followers</span>
-          <span class="quantity">1000</span>
-        </li>
-        <li>
-          <span class="label">Views</span>
-          <span class="quantity">2000</span>
-        </li>
-        <li>
-          <span class="label">Likes</span>
-          <span class="quantity">3000</span>
-        </li>
-      </ul>
-    </div>
+      <ProfileStats>
+        <ProfileStatsItem>
+          <StatLabel>Followers</StatLabel>
+          <StatCount>{stats.followers}</StatCount>
+        </ProfileStatsItem>
+        <ProfileStatsItem>
+          <StatLabel>Views</StatLabel>
+          <StatCount>{stats.views}</StatCount>
+        </ProfileStatsItem>
+        <ProfileStatsItem>
+          <StatLabel>Likes</StatLabel>
+          <StatCount>{stats.likes}</StatCount>
+        </ProfileStatsItem>
+      </ProfileStats>
+    </ProfileContainer>
   );
+};
+
+Profile.propTypes = {
+  user: PropTypes.exact({
+    username: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    stats: PropTypes.exact({
+      followers: PropTypes.number.isRequired,
+      views: PropTypes.number.isRequired,
+      likes: PropTypes.number.isRequired,
+    }),
+  }),
 };
